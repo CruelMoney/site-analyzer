@@ -8,9 +8,10 @@ const { env } = require('../../config/vars');
  * @public
  */
 const handler = (err, req, res, next) => {
+  const status = err.status || 500;
   const response = {
-    code: err.status,
-    message: err.message || httpStatus[err.status],
+    code: status,
+    message: err.message || httpStatus[status],
     errors: err.errors,
     stack: err.stack,
   };
@@ -19,7 +20,7 @@ const handler = (err, req, res, next) => {
     delete response.stack;
   }
 
-  res.status(err.status);
+  res.status(status);
   res.json(response);
   res.end();
 };
