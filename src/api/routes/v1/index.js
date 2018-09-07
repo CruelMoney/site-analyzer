@@ -6,7 +6,15 @@ const analyzerRoutes = require('./analyzer.route');
 const router = express.Router();
 
 /**
- * GET v1/status
+ * @api {post} v1/status Status
+ * @apiDescription Check that the service is running
+ * @apiVersion 1.0.0
+ * @apiName Status
+ * @apiGroup Status
+ * @apiPermission public
+ *
+ * @apiSuccess {String} status indicates that the service is running
+ *
  */
 router.get('/status', (req, res) => res.send('OK'));
 

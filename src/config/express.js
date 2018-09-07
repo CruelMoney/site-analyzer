@@ -38,6 +38,9 @@ app.use(cors());
 // mount api v1 routes
 app.use('/v1', routes);
 
+// serve docs
+app.use('/docs', express.static('docs'));
+
 // if error is not an instanceOf APIError, convert it.
 app.use(error.converter);
 
