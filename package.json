@@ -1,6 +1,6 @@
 {
   "name": "website-analyzer-api",
-  "version": "1.2.2",
+  "version": "1.1.0",
   "description": "Node API exposing google lighthouse API",
   "author": "Christopher Dengsoe <chrdengso@gmail.com>",
   "main": "src/index.js",
@@ -19,7 +19,7 @@
   "scripts": {
     "precommit": "yarn lint",
     "prestart": "yarn docs",
-    "start": "cross-env NODE_ENV=production pm2 start ./src/index.js",
+    "start": "cross-env NODE_ENV=production pm2 start ./src/index.js --watch",
     "dev": "nodemon ./src/index.js",
     "lint": "eslint **/*.js --ignore-path .gitignore --ignore-pattern internals/scripts",
     "lint:fix": "yarn lint -- --fix",

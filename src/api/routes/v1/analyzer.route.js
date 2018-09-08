@@ -3,7 +3,6 @@ const { analyze } = require('../../services/lighthouse');
 const { handler: errorHandler } = require('../../middlewares/error');
 const APIError = require('../../utils/APIError');
 const httpStatus = require('http-status');
-
 const router = express.Router();
 
 /**

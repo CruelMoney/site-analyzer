@@ -3,6 +3,8 @@ const express = require('express');
 // const authRoutes = require('./auth.route');
 const analyzerRoutes = require('./analyzer.route');
 
+var packageJson = require('../../../../package.json');
+
 const router = express.Router();
 
 /**
@@ -16,7 +18,7 @@ const router = express.Router();
  * @apiSuccess {String} status indicates that the service is running
  *
  */
-router.get('/status', (req, res) => res.send('OK'));
+router.get('/status', (req, res) => res.send('OK Version: ' + packageJson.version));
 
 router.use('/analyze', analyzerRoutes);
 
