@@ -1,5 +1,6 @@
 const lighthouse = require('lighthouse');
 const chromeLauncher = require('chrome-launcher');
+const log = require('lighthouse-logger');
 
 
 const config = {
@@ -22,6 +23,9 @@ const config = {
   },
 };
 
+
+log.setLevel('info');
+
 const parseIdObject = (o) => {
   const res = {};
   Object.keys(o)
@@ -32,9 +36,10 @@ const parseIdObject = (o) => {
 }
 
 const launchChromeAndRunLighthouse = url =>
-  chromeLauncher.launch({ chromeFlags: ['--disable-gpu', '--headless', '--no-sandbox'] }).then((chrome) => {
+  chromeLauncher.launch({chromeFlags: ['--disable-gpu', '--headless', '--no-sandbox']}).then((chrome) => {
     const o = {
       port: chrome.port,
+      logLevel: 'info'
     };
     return lighthouse(url, o, config)
       .then(results => chrome.kill().then(() => {

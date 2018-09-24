@@ -85,6 +85,7 @@
     "joi": "^10.4.1",
     "jwt-simple": "0.5.1",
     "lighthouse": "2.8.0",
+    "lighthouse-logger": "^1.1.0",
     "lodash": "^4.17.4",
     "method-override": "^2.3.8",
     "moment-timezone": "^0.5.13",
