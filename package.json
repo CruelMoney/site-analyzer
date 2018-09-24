@@ -1,6 +1,6 @@
 {
   "name": "website-analyzer-api",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Node API exposing google lighthouse API",
   "author": "Christopher Dengsoe <chrdengso@gmail.com>",
   "main": "src/index.js",
