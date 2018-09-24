@@ -10,7 +10,8 @@ const config = {
       'redirects-http',
       'no-vulnerable-libraries',
       'external-anchors-use-rel-noopener',
-
+      
+      'screenshot-thumbnails',
       'first-meaningful-paint',
       'uses-http2',
       'offscreen-images',       // Consider lazy-loading offscreen and hidden images to improve page load speed and time to interactive.
