@@ -18,7 +18,7 @@ const router = express.Router();
  * @apiSuccess {String} status indicates that the service is running
  *
  */
-router.get('/status', (req, res) => res.send('OK Version: ' + packageJson.version));
+router.get('/status', (req, res) => res.send('OK Running version: ' + packageJson.version));
 
 router.use('/analyze', analyzerRoutes);
 
