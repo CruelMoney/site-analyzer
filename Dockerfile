@@ -1,4 +1,4 @@
-FROM rastasheep/alpine-node-chromium:8-alpine
+FROM rastasheep/alpine-node-chromium:9-alpine
 
 EXPOSE 3000
 
