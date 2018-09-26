@@ -1,6 +1,5 @@
 FROM rastasheep/alpine-node-chromium:8-alpine
 
-
 EXPOSE 3000
 
 ARG NODE_ENV
