@@ -84,7 +84,7 @@
     "https": "^1.0.0",
     "joi": "^10.4.1",
     "jwt-simple": "0.5.1",
-    "lighthouse": "3.1.1",
+    "lighthouse": "2.9.1",
     "lighthouse-logger": "^1.1.0",
     "lodash": "^4.17.4",
     "method-override": "^2.3.8",
