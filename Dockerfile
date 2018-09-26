@@ -1,4 +1,4 @@
-FROM node:8-jessie
+FROM rastasheep/alpine-node-chromium:8-alpine
 
 # Install Chrome
 RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
