@@ -5,6 +5,62 @@ const log = require('lighthouse-logger');
 
 const config = {
   extends: 'lighthouse:default',
+  passes: [{
+    passName: 'defaultPass',
+    recordTrace: true,
+    useThrottling: false,
+    pauseAfterLoadMs: 1000,
+    networkQuietThresholdMs: 1000,
+    cpuQuietThresholdMs: 1000,
+    gatherers: [
+      'scripts',
+      'css-usage',
+      'viewport',
+      'viewport-dimensions',
+      'theme-color',
+      'manifest',
+      'runtime-exceptions',
+      'chrome-console-messages',
+      'image-usage',
+      'accessibility',
+      'dobetterweb/anchors-with-no-rel-noopener',
+      'dobetterweb/appcache',
+      'dobetterweb/doctype',
+      'dobetterweb/domstats',
+      'dobetterweb/js-libraries',
+      'dobetterweb/optimized-images',
+      'dobetterweb/password-inputs-with-prevented-paste',
+      'dobetterweb/response-compression',
+      'dobetterweb/tags-blocking-first-paint',
+      'dobetterweb/websql',
+      'seo/meta-description',
+      'seo/font-size',
+      'seo/crawlable-links',
+      'seo/meta-robots',
+      'seo/hreflang',
+      'seo/embedded-content',
+      'seo/canonical',
+      'seo/robots-txt',
+      'fonts',
+    ],
+  },
+  {
+    passName: 'offlinePass',
+    gatherers: [
+      'service-worker',
+      'offline',
+      'start-url',
+    ],
+  },
+  {
+    passName: 'redirectPass',
+    // Speed up the redirect pass by blocking stylesheets, fonts, and images
+    blockedUrlPatterns: ['*.css', '*.jpg', '*.jpeg', '*.png', '*.gif', '*.svg', '*.ttf', '*.woff', '*.woff2'],
+    gatherers: [
+      'http-redirect',
+      'html-without-javascript',
+    ],
+  }],
   settings: {
     onlyAudits: [
       'is-on-https',
@@ -36,7 +92,11 @@ const parseIdObject = (o) => {
 }
 
 const launchChromeAndRunLighthouse = url =>
-  chromeLauncher.launch({chromeFlags: ['--disable-gpu', '--headless', '--no-sandbox']}).then((chrome) => {
+  chromeLauncher.launch({
+    disableCpuThrottling: true,
+    disableNetworkThrottling: true,
+    chromeFlags: ['--disable-gpu', '--headless', '--no-sandbox', '--window-size=1000,1000']
+  }).then((chrome) => {
     const o = {
       port: chrome.port,
       logLevel: 'info'
@@ -44,16 +104,13 @@ const launchChromeAndRunLighthouse = url =>
     return lighthouse(url, o, config)
       .then(results => chrome.kill().then(() => {
         let res = {};
+        console.log(results.lhr.audits)
+        
 
-        Object.values(results.reportCategories).map(category => {
-          const cat = {
-            ...category,
-            audits: parseIdObject(category.audits)
-          }
-          res[category.id] = cat;
-        });
-
-        return res;
+        return {
+          audits: results.lhr.audits,
+          categories: results.lhr.categories
+        };
       }))
       .catch(e => {
         if(e.friendlyMessage){
